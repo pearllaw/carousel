@@ -12,6 +12,49 @@ export default class Carousel extends Component {
       ],
       currentIndex: 0
     }
+    this.autoplay = this.autoplay.bind(this)
+    this.timeout = null
+    this.isTransitioning = false
+    this.prev = this.prev.bind(this)
+    this.next = this.next.bind(this)
+  }
+
+  autoplay() {
+    let timeout = this.timeout = setTimeout(() => {
+      if (this.timeout !== timeout) return
+      this.next()
+    }, 3000)
+  }
+
+  transition(step) {
+    if (this.isTransitioning) return
+    this.isTransitioning = !!setTimeout(() => {
+      this.isTransitioning = false
+      this.autoplay()
+    }, 500)
+    this.setState({ currentIndex: step })
+  }
+
+  handlePrev() {
+    const { currentIndex, dogs } = this.state
+    return currentIndex ? currentIndex - 1 : dogs.length - 1
+  }
+
+  handleNext() {
+    const { currentIndex, dogs } = this.state
+    return currentIndex < dogs.length - 1 ? currentIndex + 1 : 0
+  }
+
+  prev() {
+    this.transition(this.handlePrev())
+  }
+
+  next() {
+    this.transition(this.handleNext())
+  }
+
+  componentDidMount() {
+    this.autoplay()
   }
 
   render() {
@@ -22,7 +65,7 @@ export default class Carousel extends Component {
         <p className="description">{dogs[currentIndex].description}</p>
         <div className="row">
           <div className="col-8 mx-auto">
-            <Slider dogs={dogs} currentIndex={currentIndex}/>
+            <Slider dogs={dogs} currentIndex={currentIndex} />
           </div>
         </div>
       </div>
