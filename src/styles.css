@@ -52,3 +52,7 @@
 .control.next {
   right: 10%;
 }
+
+#dot {
+  padding: 5px;
+}

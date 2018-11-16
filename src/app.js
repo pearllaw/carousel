@@ -68,6 +68,15 @@ export default class Carousel extends Component {
             <Slider dogs={dogs} currentIndex={currentIndex} />
           </div>
         </div>
+        <div className="row">
+          <div className="col-8 mx-auto text-center">
+            <div className="indicators">
+              <i className={currentIndex === 0 ? 'fas fa-circle' : 'far fa-circle'} id="dot"></i>
+              <i className={currentIndex === 1 ? 'fas fa-circle' : 'far fa-circle'} id="dot"></i>
+              <i className={currentIndex === 2 ? 'fas fa-circle' : 'far fa-circle'} id="dot"></i>
+            </div>
+          </div>
+        </div>
         <div className="controls">
           <i className="control prev fas fa-angle-left fa-5x"></i>
           <i className="control next fas fa-angle-right fa-5x"></i>
