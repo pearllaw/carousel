@@ -31,7 +31,6 @@
 
 .image.prev {
   transform: translateX(-100%);
-  visibility: hidden;
 }
 
 .image.next {
