@@ -78,8 +78,8 @@ export default class Carousel extends Component {
           </div>
         </div>
         <div className="controls">
-          <i className="control prev fas fa-angle-left fa-5x"></i>
-          <i className="control next fas fa-angle-right fa-5x"></i>
+          <i className="control prev fas fa-angle-left fa-5x" onClick={this.prev}></i>
+          <i className="control next fas fa-angle-right fa-5x" onClick={this.next}></i>
         </div>
       </div>
     )
