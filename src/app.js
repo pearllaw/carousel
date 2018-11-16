@@ -10,7 +10,8 @@ export default class Carousel extends Component {
         {breed: 'German Shepherd', description: 'Origin: Germany', imageUrl: 'http://texasworkingshepherds.com/wp-content/uploads/2013/09/German-SHepherd.png'},
         {breed: 'Golden Retriever', description: 'Origin: Scotland', imageUrl: 'http://images6.fanpop.com/image/photos/41400000/cute-golden-retrievers-eating-ice-cream-golden-retreivers-41435145-500-500.jpg'}
       ],
-      currentIndex: 0
+      currentIndex: 0,
+      back: false
     }
     this.autoplay = this.autoplay.bind(this)
     this.timeout = null
@@ -47,10 +48,12 @@ export default class Carousel extends Component {
 
   prev() {
     this.transition(this.handlePrev())
+    this.setState({ back: true })
   }
 
   next() {
     this.transition(this.handleNext())
+    this.setState({ back: false })
   }
 
   componentDidMount() {
@@ -58,15 +61,28 @@ export default class Carousel extends Component {
   }
 
   render() {
-    const { dogs, currentIndex } = this.state
+    const { dogs, currentIndex, back } = this.state
     return (
       <div className="container">
         <h1 className="title">{dogs[currentIndex].breed}</h1>
         <p className="description">{dogs[currentIndex].description}</p>
         <div className="row">
           <div className="col-8 mx-auto">
-            <Slider dogs={dogs} currentIndex={currentIndex} />
+            <Slider dogs={dogs} currentIndex={currentIndex} back={back} />
           </div>
+        </div>
+        <div className="row">
+          <div className="col-8 mx-auto text-center">
+            <div className="indicators">
+              <i className={currentIndex === 0 ? 'fas fa-circle' : 'far fa-circle'} id="dot"></i>
+              <i className={currentIndex === 1 ? 'fas fa-circle' : 'far fa-circle'} id="dot"></i>
+              <i className={currentIndex === 2 ? 'fas fa-circle' : 'far fa-circle'} id="dot"></i>
+            </div>
+          </div>
+        </div>
+        <div className="controls">
+          <i className="control prev fas fa-angle-left fa-5x" onClick={this.prev}></i>
+          <i className="control next fas fa-angle-right fa-5x" onClick={this.next}></i>
         </div>
       </div>
     )
