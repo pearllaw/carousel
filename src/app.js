@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Slider from './slider'
 
 export default class Carousel extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export default class Carousel extends Component {
         <p className="description">{dogs[currentIndex].description}</p>
         <div className="row">
           <div className="col-8 mx-auto">
-            // Images
+            <Slider dogs={dogs} currentIndex={currentIndex}/>
           </div>
         </div>
       </div>
